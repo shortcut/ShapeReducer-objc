@@ -19,6 +19,28 @@
     return self;
 }
 
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [self init];
+    if ( self ) {
+        self.latitude = [aDecoder decodeDoubleForKey:@"latitude"];
+        self.longitude = [aDecoder decodeDoubleForKey:@"longitude"];
+        self.sequence = [aDecoder decodeIntForKey:@"sequence"];
+    }
+
+    return self;
+}
+
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeDouble:self.latitude forKey:@"latitude"];
+    [aCoder encodeDouble:self.longitude forKey:@"longitude"];
+    [aCoder encodeInt:self.sequence forKey:@"sequence"];
+}
+
+
 @end
 
 @implementation Shape
@@ -33,6 +55,24 @@
 	} 
     return self;
 }
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [self init];
+    if ( self ) {
+        _points = [[NSMutableArray alloc] initWithArray:[aDecoder decodeObjectForKey:@"points"]];
+        _needs_sort = YES;
+    }
+
+    return self;
+}
+
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:_points forKey:@"points"];
+}
+
 
 - (void)addPoint:(ShapePoint *)point {
     [_points addObject:point];

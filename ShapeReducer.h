@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-@interface ShapePoint : NSObject {
+@interface ShapePoint : NSObject <NSCoding> {
     double latitude;
     double longitude;
     unsigned int sequence;
@@ -14,7 +14,7 @@
 
 @end
 
-@interface Shape : NSObject {
+@interface Shape : NSObject <NSCoding> {
 @private
     NSMutableArray *_points;
     BOOL _needs_sort;
